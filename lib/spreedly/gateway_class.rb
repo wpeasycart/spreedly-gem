@@ -24,7 +24,8 @@ module Spreedly
     def self.new_list_from(xml_doc)
       gateways = xml_doc.xpath('.//gateways/gateway')
       gateways.map do |each|
-        self.new(each)
+        if 'authorize_net' == each.gateway_type || 'stripe' == each.gateway_type || 'paypal' == each.gateway_type || 'first_data_e4' == each.gateway_type || 'test' == each.gateway_type
+          self.new(each)
       end
     end
 
